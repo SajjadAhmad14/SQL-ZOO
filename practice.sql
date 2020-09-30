@@ -124,3 +124,39 @@ SELECT continent
 FROM world
 GROUP BY continent
 HAVING SUM(population) >= 100000000;
+
+SELECT player, teamid, stadium, mdate
+  FROM game JOIN goal ON (id=matchid)
+WHERE teamid = 'GER'
+
+SELECT team1, team2, player FROM game JOIN goal ON (id = matchid)
+WHERE player LIKE 'Mario%'
+
+SELECT player, teamid, coach, gtime
+  FROM goal JOIN eteam ON (teamid = id)
+ WHERE gtime<=10
+
+ SELECT mdate, teamname FROM eteam JOIN game ON (eteam.id = team1)
+WHERE coach = 'Fernando Santos'
+
+SELECT player FROM goal JOIN game ON (matchid = id)
+WHERE stadium = 'National Stadium, Warsaw'
+
+SELECT DISTINCT player
+  FROM game JOIN goal ON (id = matchid) 
+    WHERE teamid != 'GER' AND (team1 = 'GER' OR team2 = 'GER')
+
+    SELECT teamname, COUNT(*)
+  FROM eteam JOIN goal ON (eteam.id=teamid)
+ GROUP BY teamname
+
+ SELECT stadium, COUNT(*) FROM game JOIN goal ON (matchid = id)
+GROUP BY stadium
+
+SELECT id, mdate, COUNT(*)
+FROM game
+JOIN goal
+ON id = matchid
+WHERE (team1 = 'POL' OR team2 = 'POL')
+GROUP BY id, mdate;
+
